@@ -1,0 +1,80 @@
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dynamic-form">
+    <div *ngFor="let section of formMetadata.formFields" class="form-section">
+      <h6>{{ section.label }}</h6>
+      <div *ngFor="let field of section.fields" class="form-field">
+        <div [ngSwitch]="field.type">
+          <div *ngSwitchCase="'text'" class="form-group">
+            <label [for]="field.name">{{ field.label }}</label>
+            <input [type]="field.type" [formControlName]="field.name" [id]="field.name" [placeholder]="field.placeholder"/>
+          </div>
+          <div *ngSwitchCase="'date'" class="form-group">
+            <label [for]="field.name">{{ field.label }}</label>
+            <input [type]="field.type" [formControlName]="field.name" [id]="field.name"/>
+          </div>
+          <div *ngSwitchCase="'radio'" class="form-group">
+            <label>{{ field.label }}</label>
+            <div class="form-options">
+              <div *ngFor="let option of field.options" class="form-option">
+                <input 
+                  type="radio" 
+                  [formControlName]="field.name" 
+                  [value]="option.value" 
+                  [id]="field.name + '_' + option.value"
+                />
+                <label [for]="field.name + '_' + option.value">{{ option.label }}</label>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'checkbox'" class="form-group">
+            <label>{{ field.label }}</label>
+            <div class="form-options">
+              <div *ngFor="let option of field.options" class="form-option">
+                <input [type]="field.type" [formControlName]="field.name" [value]="option.value"   (change)="onCheckboxChange($event, field.name)"/> {{ option.label }}
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'select'" class="form-group">
+            <label [for]="field.name">{{ field.label }}</label>
+            <select [formControlName]="field.name" [id]="field.name">
+              <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
+            </select>
+          </div>
+        </div>
+        <div *ngIf="form.controls[field.name].invalid && (form.controls[field.name].dirty || form.controls[field.name].touched)" class="error-message mb-2">
+          <div *ngIf="form.controls[field.name].errors?.required " >{{ field.label }} is required *</div>
+          <div *ngIf="form.controls[field.name].errors?.pattern">Invalid {{ field.label }}</div>
+          <div *ngIf="form.controls[field.name].errors?.minlength">Minimum length is {{ field.validations.minLength }}</div>
+          <div *ngIf="form.controls[field.name].errors?.maxlength">Maximum length is {{ field.validations.maxLength }}</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit"   class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+  </form> -->
+  
+
+
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dynamic-form">
+    <div *ngFor="let section of formMetadata.formFields" class="form-section">
+      <h6 class="mt-2">{{ section.label }}</h6>
+      <hr>
+      <div *ngFor="let field of section.fields" class="form-field mt-3">
+        <div [ngSwitch]="field.type" class="form-group">
+          <app-text-input *ngSwitchCase="'text'" [label]="field.label" [placeholder]="field.placeholder" [id]="field.name" [formControlName]="field.name"></app-text-input>
+          <app-date-input *ngSwitchCase="'date'" [label]="field.label" [id]="field.name" [formControlName]="field.name"></app-date-input>
+          <app-checkbox-input *ngSwitchCase="'checkbox'" [label]="field.label" [options]="field.options" [formControlName]="field.name"></app-checkbox-input>
+          <app-select-input *ngSwitchCase="'select'" [label]="field.label" [options]="field.options" [id]="field.name" [formControlName]="field.name"></app-select-input>
+          <app-radio-input *ngSwitchCase="'radio'" [label]="field.label" [options]="field.options" [id]="field.name" [formControlName]="field.name"></app-radio-input>
+        </div>
+        <div *ngIf="form.controls[field.name].invalid && (form.controls[field.name].dirty || form.controls[field.name].touched)" class="error-message mb-2">
+          <div *ngIf="form.controls[field.name].errors?.required">{{ field.label }} is required *</div>
+          <div *ngIf="form.controls[field.name].errors?.pattern">Invalid {{ field.label }}</div>
+          <div *ngIf="form.controls[field.name].errors?.minlength">Minimum length is {{ field.validations.minLength }}</div>
+          <div *ngIf="form.controls[field.name].errors?.maxlength">Maximum length is {{ field.validations.maxLength }}</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" >Submit</button>
+  </form>
+  
+  

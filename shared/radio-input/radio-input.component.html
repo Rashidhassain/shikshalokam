@@ -1,0 +1,15 @@
+<div class="form-group">
+    <label>{{ label }}</label>
+    <div class="form-options">
+      <div *ngFor="let option of options" class="form-option">
+        <input
+          type="radio"
+          [checked]="option.value === value"
+          (change)="updateValue(option)"
+          [id]="option.value"
+        />
+        <label [for]="option.value">{{ option.label }}</label>
+      </div>
+    </div>
+  </div>
+  

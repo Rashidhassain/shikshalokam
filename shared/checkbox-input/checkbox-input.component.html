@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label>{{ label }}</label>
+    <div class="form-options">
+      <div *ngFor="let option of options" class="form-option">
+        <input type="checkbox" [checked]="value.includes(option.value)" (change)="onCheckboxChange(option, $event)" />
+        <label>{{ option.label }}</label>
+      </div>
+    </div>
+  </div>
+  
